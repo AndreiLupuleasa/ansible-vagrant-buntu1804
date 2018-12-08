@@ -2,5 +2,5 @@
 
 How to use:
 clone
-vagrant up
+vagrant up <br>
 vagrant ssh
