@@ -1,0 +1,7 @@
+---
+# created by Andrei Lupuleasa, December 2018.
+ - hosts: all
+   roles:
+    - init
+    - apache
+    - php72
