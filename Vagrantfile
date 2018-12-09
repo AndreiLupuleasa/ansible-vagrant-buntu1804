@@ -21,13 +21,13 @@ Vagrant.configure(2) do |config|
   
   # ORACLE VORTUALBOX and hardware config
   config.vm.provider "virtualbox" do |v|
-	v.name = "vagrantdev" # VM name
+	  v.name = "vagrantdev" # VM name
     v.memory = 4096 # RAM
     v.cpus = 4 # CPU count
-	v.customize ["modifyvm", :id, "--vram", "64"] # video ram memory
-	v.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
+	  v.customize ["modifyvm", :id, "--vram", "64"] # video ram memory
+	  v.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
     v.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
-	v.customize ["modifyvm", :id, "--vrde", "off"] # disable remote desktop
+	  v.customize ["modifyvm", :id, "--vrde", "off"] # disable remote desktop
   end
   
  # set IP and ports
@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
   # Run Ansible files
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose = "vv"
-	ansible.become = true # execute as root
+	  ansible.become = true # execute as root
     ansible.playbook = "ansible/playbook.yml"
   end    
 end
