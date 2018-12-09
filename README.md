@@ -1,4 +1,4 @@
-# ansible-vagrant-buntu1804
+# ansible-vagrant-ubuntu1804
 
 How to use:<br>
 clone<br>
