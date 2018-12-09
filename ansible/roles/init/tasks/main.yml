@@ -1,13 +1,13 @@
 ---
 # created by Andrei Lupuleasa, December 2018.
-- name: Update and upgrade apt packages
+- name: 1.Update and upgrade apt packages
   become: true
   apt:
     upgrade: yes
     update_cache: yes
     cache_valid_time: 86400 #One day
 
-- name: Install programs
+- name: 2.Install programs
   apt: 
     pkg:
      - curl
@@ -20,4 +20,8 @@
      - vim
      - wget
      - zip  
+     - composer
     state: present
+    
+- name: 3.Install python extensions
+  apt: name=python-pexpect update_cache=yes state=latest

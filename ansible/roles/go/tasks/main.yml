@@ -1,0 +1,3 @@
+---
+- name: 1.Install Go latest
+  apt: name=golang update_cache=yes state=latest

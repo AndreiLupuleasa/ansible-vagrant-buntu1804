@@ -5,3 +5,5 @@
     - init
     - apache
     - php72
+    - couchbase
+    - go

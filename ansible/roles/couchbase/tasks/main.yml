@@ -1,0 +1,17 @@
+---
+- name: 1.Install Gdebi latest
+  apt: name=gdebi-core update_cache=yes state=latest
+  
+- name: 2.Download Couchbase
+  shell: wget https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+
+- name: 3.Install Couchbase
+  become: true
+  expect:
+    command: gdebi couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+    responses: 
+      'Do you want to install the software package\? \[y/N\]': 'y'
+
+- name: 4.Update firewall
+  become: true
+  command: ufw allow from any to any port 369,8091:8094,9100:9105,9998,9999,11209:11211,11214,11215,18091:18093,21100:21299 proto tcp

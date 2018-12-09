@@ -39,6 +39,7 @@ Vagrant.configure(2) do |config|
   # shared directories - config used for windows OS host
   config.vm.synced_folder "share", "/var/www/html", type: "nfs"
   # config.vm.provision "file", source: "~/ssh/private_git.ppk", destination: "/var/www/private_git.ppk"	
+  
   # Run Ansible files
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose = "vv"
