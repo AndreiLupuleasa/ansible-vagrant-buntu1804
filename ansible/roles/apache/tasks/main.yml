@@ -1,9 +1,9 @@
 ---
 - name: 1.Install Apache2 latest
-  apt: name=apache2 update_cache=yes state=latest
+  apt: name=apache2 update_cache=yes state=latest cache_valid_time=86400
 
 - name: 2.Install PHP module for Apache
-  apt: name=libapache2-mod-php7.2 state=latest
+  apt: name=libapache2-mod-php7.2 update_cache=yes state=latest cache_valid_time=86400
   
 - name: 3.Enabled mod_rewrite
   apache2_module: name=rewrite state=present

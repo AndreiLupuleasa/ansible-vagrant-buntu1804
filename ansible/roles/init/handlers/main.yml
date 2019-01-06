@@ -1,0 +1,5 @@
+---
+# - name: move-vimrc
+#   copy:
+#     src: /var/www/html/vimrc/.vimrc
+#     dest: ~/.vimrc
