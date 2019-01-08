@@ -8,13 +8,13 @@
     url: https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
     dest: /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
 
-- name: 3.Install Couchbase server
-  run_once: true
-  become: true
-  expect:
-    command: gdebi /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
-    responses: 
-      'Do you want to install the software package\? \[y/N\]': 'y'
+#- name: 3.Install Couchbase server
+#  run_once: true
+#  become: true
+#  expect:
+#    command: gdebi /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+#    responses:
+#      'Do you want to install the software package\? \[y/N\]': 'y'
 
 # - name: 4.Download Couchbase
 #   get_url:

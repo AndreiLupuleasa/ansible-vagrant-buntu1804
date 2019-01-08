@@ -3,7 +3,9 @@
 - name: 1.Update and upgrade apt packages
   become: true
   apt:
+#    name: aptitude
     upgrade: yes
+    state: present
     update_cache: yes
     cache_valid_time: 86400 #One day
 
@@ -28,17 +30,25 @@
   apt: name=python-pexpect update_cache=yes state=latest
 
 - name: 4.Copy Vimrc
+  run_once: true
   copy: 
     src: .vimrc
     dest: /home/vagrant/.vimrc
 
-- name: 4.Install vim color schemes
+- name: 5.Install vim color schemes
   git:
     repo: git@github.com:flazz/vim-colorschemes.git
     version: master
     dest: /home/vagrant/.vim
     accept_hostkey: yes
   become: no
+
+- name: 6.Copy Bashrc.
+  run_once: true
+  copy:
+    src: .bashrc
+    dest: /home/vagrant/.bashrc
+
 # - name: 4.Clone Vimrc
 #   git:
 #     repo: git@github.com:alupuleasa/vimrc.git
