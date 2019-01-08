@@ -4,6 +4,7 @@
   apt:
     name:
      - php7.2
+     - php7.2-dev
      - php7.2-cli 
      - php7.2-common 
      - php7.2-fpm 
@@ -22,11 +23,38 @@
      - php7.2-curl 
      - php7.2-bcmath
      - php7.2-apcu
+     - php-amqp
+     - php-pecl-http
+     - php-pear
+     - mcrypt
+     - libmcrypt4
+     - libmcrypt-dev 
+     - libtomcrypt-dev
+     - libtomcrypt1
     state: latest
   notify:
    - restart-apache2
-   
-- name: Write into index.php file
+
+# - name: 2.Install PHP packages with Pecl
+#   become: true
+#   command: pecl install mcrypt-1.0.1
+#   run_once: true
+
+# - name: 3.Enable mcrypt
+#   become: true
+#   shell:
+#    - bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
+#    - bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/apache2/conf.d/mcrypt.ini"
+#   notify:
+#    - restart-apache2  
+
+# - name: 3.Enable mcrypt
+#   become: true
+#   command: phpenmod mcrypt 
+#   notify:
+#    - restart-apache2
+
+- name: 4.Write into index.php file
   copy:
     dest: /var/www/html/index.php
     content: '<?php phpinfo(); ?>' 

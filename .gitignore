@@ -1,2 +1,3 @@
-/.vagrant/*
-share/*
+/share
+/.vagrant
+/ansible/.idea

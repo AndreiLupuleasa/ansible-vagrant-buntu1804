@@ -22,8 +22,8 @@ Vagrant.configure(2) do |config|
   # ORACLE VORTUALBOX and hardware config
   config.vm.provider "virtualbox" do |v|
 	  v.name = "vagrantdev" # VM name
-    v.memory = 4096 # RAM
-    v.cpus = 4 # CPU count
+    v.memory = 1096 # RAM
+    v.cpus = 1 # CPU count
 	  v.customize ["modifyvm", :id, "--vram", "64"] # video ram memory
 	  v.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
     v.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
