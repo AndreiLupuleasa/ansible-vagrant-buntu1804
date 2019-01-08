@@ -1,6 +1,6 @@
 ---
 - name: 1.Install Gdebi latest
-  apt: name=gdebi-core update_cache=yes state=latest
+  apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
   
 - name: 2.Download Couchbase server
   get_url:

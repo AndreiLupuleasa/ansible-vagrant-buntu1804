@@ -15,13 +15,37 @@
      - gcc
      - git
      - man
-     - nano
      - unzip
      - vim
      - wget
      - zip  
      - composer
     state: present
+    update_cache: yes
+    cache_valid_time: 86400 #One day
     
 - name: 3.Install python extensions
   apt: name=python-pexpect update_cache=yes state=latest
+
+- name: 4.Copy Vimrc
+  copy: 
+    src: .vimrc
+    dest: /home/vagrant/.vimrc
+
+- name: 4.Install vim color schemes
+  git:
+    repo: git@github.com:flazz/vim-colorschemes.git
+    version: master
+    dest: /home/vagrant/.vim
+    accept_hostkey: yes
+  become: no
+# - name: 4.Clone Vimrc
+#   git:
+#     repo: git@github.com:alupuleasa/vimrc.git
+#     version: master
+#     dest: /var/www/html/vimrc
+#     accept_hostkey: yes
+#   # ssh-agent doesn't allow key to pass through remote sudo commands.
+#   become: no
+#   notify:
+#     - move-vimrc
