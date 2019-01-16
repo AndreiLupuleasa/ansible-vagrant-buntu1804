@@ -43,11 +43,18 @@
     accept_hostkey: yes
   become: no
 
-- name: 6.Copy Bashrc.
+# How to add .bashrc variable
+# export test="xxx"
+
+- name: 6.Modify Bashrc HISTSIZE.
   run_once: true
-  copy:
-    src: .bashrc
-    dest: /home/vagrant/.bashrc
+  become: true
+  command: sed -i 's/HISTSIZE=1000/HISTSIZE=/g' ~/.bashrc
+
+- name: 6.Modify Bashrc HISTSIZE.
+  run_once: true
+  become: true
+  command: sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
 
 # - name: 4.Clone Vimrc
 #   git:
