@@ -50,15 +50,15 @@
 #   notify:
 #    - restart-apache2
 
- - name: 4.Write mcrypt.ini
-   run_once: true
-   copy:
-     dest:
+- name: 4.Write mcrypt.ini
+  run_once: true
+  copy:
+    dest:
      - /etc/php/7.2/cli/conf.d/mcrypt.ini
      - /etc/php/7.2/apache2/conf.d/mcrypt.ini
-     content: 'extension=/usr/lib/php/20170718/mcrypt.so'
-   notify:
-     - restart-apache2
+    content: 'extension=/usr/lib/php/20170718/mcrypt.so'
+  notify:
+   - restart-apache2
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -76,10 +76,10 @@
 
 - name: 5.Enable Couchbase
   run_once: true
-    copy:
-      src: couchbase.ini
-      dest:
-        - /etc/php/7.2/apache2/conf.d/couchbase.ini
-        - /etc/php/7.2/cli/conf.d/couchbase.ini
+  copy:
+    src: couchbase.ini
+    dest:
+     - /etc/php/7.2/apache2/conf.d/couchbase.ini
+     - /etc/php/7.2/cli/conf.d/couchbase.ini
   notify:
-    - restart-apache2
+   - restart-apache2
