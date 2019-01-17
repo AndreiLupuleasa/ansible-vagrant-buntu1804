@@ -37,10 +37,16 @@
   notify:
    - restart-apache2
 
-# - name: 2.Install PHP packages with Pecl
-#   become: true
-#   command: pecl install mcrypt-1.0.1
-#   run_once: true
+- name: 2.Update  Pecl
+  become: true
+  command: pecl channel-update pecl.php.net
+  run_once: true
+
+- name: 3.Install PHP packages with Pecl
+  become: true
+  command: pecl install mcrypt-1.0.1
+  ignore_errors: yes
+  run_once: true
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -53,12 +59,14 @@
 - name: 4.Write mcrypt.ini
   run_once: true
   copy:
-    dest:
-     - /etc/php/7.2/cli/conf.d/mcrypt.ini
-     - /etc/php/7.2/apache2/conf.d/mcrypt.ini
+    dest: '{{item}}'
     content: 'extension=/usr/lib/php/20170718/mcrypt.so'
+  with_items:
+   - '/etc/php/7.2/cli/conf.d/mcrypt.ini'
+   - '/etc/php/7.2/apache2/conf.d/mcrypt.ini'
   notify:
    - restart-apache2
+  ignore_errors: yes
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -78,8 +86,9 @@
   run_once: true
   copy:
     src: couchbase.ini
-    dest:
-     - /etc/php/7.2/apache2/conf.d/couchbase.ini
-     - /etc/php/7.2/cli/conf.d/couchbase.ini
+    dest: '{{item}}'
+  with_items:
+   - '/etc/php/7.2/apache2/conf.d/couchbase.ini'
+   - '/etc/php/7.2/cli/conf.d/couchbase.ini'
   notify:
    - restart-apache2
