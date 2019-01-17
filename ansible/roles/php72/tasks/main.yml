@@ -59,4 +59,15 @@
 - name: 4.Write into index.php file
   copy:
     dest: /var/www/html/index.php
-    content: '<?php phpinfo(); ?>' 
+    content: '<?php phpinfo(); ?>'
+
+#/etc/php/7.2/apache2/conf.d/mcrypt.ini
+#/etc/php/7.2/cli/conf.d/mcrypt.ini
+
+- name: 5.Enable Couchbase
+  run_once: true
+    copy:
+      src: couchbase.ini
+      dest:
+        - /etc/php/7.2/apache2/conf.d/couchbase.ini
+        - /etc/php/7.2/cli/conf.d/couchbase.ini

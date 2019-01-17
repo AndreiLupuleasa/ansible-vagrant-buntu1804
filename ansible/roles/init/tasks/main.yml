@@ -45,16 +45,22 @@
 
 # How to add .bashrc variable
 # export test="xxx"
+# sed -i 's/HISTSIZE=1000/HISTSIZE=/g' ~/.bashrc
+# sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
 
 - name: 6.Modify Bashrc HISTSIZE.
   run_once: true
-  become: true
-  command: sed -i 's/HISTSIZE=1000/HISTSIZE=/g' ~/.bashrc
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    regexp: 'HISTSIZE=1000'
+    line: 'HISTSIZE='
 
-- name: 6.Modify Bashrc HISTSIZE.
+- name: 7.Modify Bashrc HISTSIZE.
   run_once: true
-  become: true
-  command: sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
+  lineinfile:
+    path: /home/vagrant/.bashrc
+    regexp: 'HISTFILESIZE=2000'
+    line: 'HISTFILESIZE='
 
 # - name: 4.Clone Vimrc
 #   git:
