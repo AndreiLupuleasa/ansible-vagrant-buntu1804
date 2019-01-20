@@ -40,13 +40,11 @@
 - name: 2.Update  Pecl
   become: true
   command: pecl channel-update pecl.php.net
-  run_once: true
 
 - name: 3.Install PHP packages with Pecl
   become: true
   command: pecl install mcrypt-1.0.1
   ignore_errors: yes
-  run_once: true
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -57,7 +55,6 @@
 #    - restart-apache2
 
 - name: 4.Write mcrypt.ini
-  run_once: true
   copy:
     dest: '{{item}}'
     content: 'extension=/usr/lib/php/20170718/mcrypt.so'
@@ -74,7 +71,7 @@
 #   notify:
 #    - restart-apache2
 
-- name: 4.Write into index.php file
+- name: 5.Write into index.php file
   copy:
     dest: /var/www/html/index.php
     content: '<?php phpinfo(); ?>'
@@ -82,8 +79,7 @@
 #/etc/php/7.2/apache2/conf.d/mcrypt.ini
 #/etc/php/7.2/cli/conf.d/mcrypt.ini
 
-- name: 5.Enable Couchbase
-  run_once: true
+- name: 6.Enable Couchbase
   copy:
     src: couchbase.ini
     dest: '{{item}}'

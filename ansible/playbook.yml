@@ -1,6 +1,7 @@
 ---
 # created by Andrei Lupuleasa, December 2018.
- - hosts: all
+ - name: Ubuntu 18.04
+   hosts: all
    roles:
     - init
     - apache

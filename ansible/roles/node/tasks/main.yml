@@ -2,25 +2,20 @@
 # - name: 1.Download and Install NVM
 #   become: true
 #   shell: wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-#   run_once: true
 
 # - name: 2.Install Node
 #   become: true
 #   command: nvm instalall 6.15.1
-#   run_once: true
   
 #- name: 3.Install Gulp
 #  become: true
 #  shell: npm install -g gulp-cli
-#  run_once: true
 
 #- name: 4.NPM Install
 #  become: true
 #  shell: npm install
-#  run_once: true
 
 #- name: 5.Gulp
 #  become: true
 #  shell: gulp
-#  run_once: true
 

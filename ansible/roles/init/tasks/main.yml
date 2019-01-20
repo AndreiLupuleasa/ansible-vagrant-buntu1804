@@ -22,6 +22,8 @@
      - wget
      - zip  
      - composer
+     - htop
+     - ngrep
     state: present
     update_cache: yes
     cache_valid_time: 86400 #One day
@@ -30,7 +32,6 @@
   apt: name=python-pexpect update_cache=yes state=latest
 
 - name: 4.Copy Vimrc
-  run_once: true
   copy: 
     src: .vimrc
     dest: /home/vagrant/.vimrc
@@ -49,14 +50,12 @@
 # sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
 
 - name: 6.Modify Bashrc HISTSIZE.
-  run_once: true
   lineinfile:
     path: /home/vagrant/.bashrc
     regexp: 'HISTSIZE=1000'
     line: 'HISTSIZE='
 
 - name: 7.Modify Bashrc HISTSIZE.
-  run_once: true
   lineinfile:
     path: /home/vagrant/.bashrc
     regexp: 'HISTFILESIZE=2000'
