@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
   # set up ssh
   config.ssh.username   = "vagrant"
   config.ssh.password   = "vagrant"
-  config.ssh.insert_key = "true"
+  #config.ssh.insert_key = "true"
   
   # ORACLE VORTUALBOX and hardware config
   config.vm.provider "virtualbox" do |vb|
