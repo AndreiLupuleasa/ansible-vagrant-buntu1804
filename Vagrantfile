@@ -31,12 +31,13 @@ Vagrant.configure(2) do |config|
   config.vm.box_check_update = false
 
   # Copy personal private key with access to repository to machine
-  # config.vm.provision "file", source: "~/ssh/private_git.ppk", destination: "/var/www/private_git.ppk"  
+  #config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"  
+  #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
   
   # set up ssh
   config.ssh.username   = "vagrant"
   config.ssh.password   = "vagrant"
-  #config.ssh.insert_key = "true"
+  #config.ssh.insert_key = "true"    #true by default
   
   # ORACLE VORTUALBOX and hardware config
   config.vm.provider "virtualbox" do |vb|
