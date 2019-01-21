@@ -36,15 +36,18 @@
     cache_valid_time: 86400 #One day
   notify:
    - restart-apache2
+  tags: once
 
 - name: 2.Update  Pecl
   become: true
   command: pecl channel-update pecl.php.net
+  tags: once
 
 - name: 3.Install PHP packages with Pecl
   become: true
   command: pecl install mcrypt-1.0.1
   ignore_errors: yes
+  tags: once
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -64,6 +67,7 @@
   notify:
    - restart-apache2
   ignore_errors: yes
+  tags: once
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -75,6 +79,7 @@
   copy:
     dest: /var/www/html/index.php
     content: '<?php phpinfo(); ?>'
+  tags: once
 
 #/etc/php/7.2/apache2/conf.d/mcrypt.ini
 #/etc/php/7.2/cli/conf.d/mcrypt.ini
@@ -88,3 +93,4 @@
    - '/etc/php/7.2/cli/conf.d/couchbase.ini'
   notify:
    - restart-apache2
+  tags: once

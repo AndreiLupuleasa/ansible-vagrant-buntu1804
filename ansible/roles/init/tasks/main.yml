@@ -8,6 +8,7 @@
     state: present
     update_cache: yes
     cache_valid_time: 86400 #One day
+  tags: daily
 
 - name: 2.Install programs
   apt: 
@@ -26,14 +27,17 @@
     state: present
     update_cache: yes
     cache_valid_time: 86400 #One day
+  tags: daily
     
 - name: 3.Install python extensions
   apt: name=python-pexpect update_cache=yes state=latest
+  tags: daily
 
 - name: 4.Copy Vimrc
   copy: 
     src: .vimrc
     dest: /home/vagrant/.vimrc
+  tags: once
 
 - name: 5.Install vim color schemes
   git:
@@ -42,6 +46,7 @@
     dest: /home/vagrant/.vim
     accept_hostkey: yes
   become: no
+  tags: once
 
 # How to add .bashrc variable
 # export test="xxx"
@@ -53,12 +58,14 @@
     path: /home/vagrant/.bashrc
     regexp: 'HISTSIZE=1000'
     line: 'HISTSIZE='
+  tags: once
 
 - name: 7.Modify Bashrc HISTSIZE.
   lineinfile:
     path: /home/vagrant/.bashrc
     regexp: 'HISTFILESIZE=2000'
     line: 'HISTFILESIZE='
+  tags: once
 
 # - name: 4.Clone Vimrc
 #   git:

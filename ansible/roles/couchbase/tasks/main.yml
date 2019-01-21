@@ -1,11 +1,13 @@
 ---
 - name: 1.Install Gdebi latest
   apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
+  tags: once
   
 - name: 2.Download Couchbase server
   get_url:
     url: https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
     dest: /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+  tags: once
 
 #- name: 3.Install Couchbase server
 #  become: true
@@ -37,11 +39,14 @@
 - name: 4.Update firewall
   become: true
   command: ufw allow from any to any port 369,8091:8094,9100:9105,9998,9999,11209:11211,11214,11215,18091:18093,21100:21299 proto tcp
+  tags: once
 
 - name: 5.Stop Couchbase Server
   become: true
   command: systemctl stop couchbase-server 
+  tags: once
 
 - name: 6.Disable Couchbase Server
   become: true
   command: systemctl disable couchbase-server 
+  tags: once

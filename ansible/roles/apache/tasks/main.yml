@@ -1,17 +1,21 @@
 ---
 - name: 1.Install Apache2 latest
   apt: name=apache2 update_cache=yes state=latest cache_valid_time=86400
+  tags: once
 
 - name: 2.Install PHP module for Apache
   apt: name=libapache2-mod-php7.2 update_cache=yes state=latest cache_valid_time=86400
+  tags: once
   
 - name: 3.Enabled mod_rewrite
   apache2_module: name=rewrite state=present
   notify:
     - restart-apache2
+  tags: once
     
 - name: 4.Start Apache
   service: name=apache2 state=started enabled=yes
+  tags: once
 
 # - name: 5.Install Hello World PHP script
   # copy: src=index.php dest=/var/www/index.php mode=0664

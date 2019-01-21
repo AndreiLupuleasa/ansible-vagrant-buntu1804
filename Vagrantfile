@@ -11,12 +11,12 @@ end
 Vagrant.configure(2) do |config|
 
   # config.vm.box = "ubuntu/trusty64" # VM OS version
-  config.vm.box = "geerlingguy/ubuntu1804" # VM OS version
+  config.vm.box      = "geerlingguy/ubuntu1804" # VM OS version
   config.vm.hostname = "vagrantdev"
   
   # set up ssh
-  config.ssh.username = "vagrant"
-  config.ssh.password = "vagrant"
+  config.ssh.username   = "vagrant"
+  config.ssh.password   = "vagrant"
   config.ssh.insert_key = "true"
   
   # ORACLE VORTUALBOX and hardware config
@@ -42,8 +42,9 @@ Vagrant.configure(2) do |config|
   
   # Run Ansible files
   config.vm.provision "ansible_local" do |ansible|
-    ansible.verbose = "vv"
-	  ansible.become = true # execute as root
+    ansible.verbose  = "vv"
+	  ansible.become   = true # execute as root
     ansible.playbook = "ansible/playbook.yml"
+    ansible.skip_tags     = "once"
   end    
 end
