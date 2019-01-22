@@ -9,6 +9,30 @@
     dest: /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
   tags: once
 
+- name: 3.Copy couchbase list
+  copy: 
+    src: couchbase.list
+    dest: /etc/apt/sources.list.d/couchbase.list
+  tags: once
+
+- name: 4.Add Couchbase Key
+  get_url:     
+    url: http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add - 
+    dest: /home/vagrant/couchbase.key
+  tags: once
+
+# - name: 4.Add Couchbase Key
+#   become: true
+#   command: wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add - 
+#   tags: once
+
+- name: 5.Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    state: present
+  tags: once
+
 #- name: 3.Install Couchbase server
 #  become: true
 #  expect:
@@ -28,25 +52,25 @@
 #     responses: 
 #       'Do you want to install the software package\? \[y/N\]': 'y'
 
-# - name: 6. Lib libcouchbase-dev 
-#   apt: 
-#     name:
-#      -libcouchbase-dev 
-#      -libcouchbase2-bin 
-#      -build-essential
-#     state: latest
+- name: 6. Install Couchbase Libs 
+  apt: 
+    name:
+     -libcouchbase-dev 
+     -libcouchbase2-bin 
+     -build-essential
+    state: latest
 
-- name: 4.Update firewall
+- name: 7.Update firewall
   become: true
   command: ufw allow from any to any port 369,8091:8094,9100:9105,9998,9999,11209:11211,11214,11215,18091:18093,21100:21299 proto tcp
   tags: once
 
-- name: 5.Stop Couchbase Server
-  become: true
-  command: systemctl stop couchbase-server 
-  tags: once
+# - name: 5.Stop Couchbase Server
+  # become: true
+  # command: systemctl stop couchbase-server 
+  # tags: once
 
-- name: 6.Disable Couchbase Server
-  become: true
-  command: systemctl disable couchbase-server 
-  tags: once
+# - name: 6.Disable Couchbase Server
+#   become: true
+#   command: systemctl disable couchbase-server 
+#   tags: once

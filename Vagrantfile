@@ -31,12 +31,12 @@ Vagrant.configure(2) do |config|
   config.vm.box_check_update = false
 
   # Copy personal private key with access to repository to machine
-  #config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"  
-  #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
+  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"  
+  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
   
   # set up ssh
-  config.ssh.username   = "vagrant"
-  config.ssh.password   = "vagrant"
+  # config.ssh.username   = "vagrant"
+  # config.ssh.password   = "vagrant"
   #config.ssh.insert_key = "true"    #true by default
   
   # ORACLE VORTUALBOX and hardware config
@@ -55,6 +55,6 @@ Vagrant.configure(2) do |config|
     ansible.verbose   = "vv"
 	  ansible.become    = true # execute as root
     ansible.playbook  = "ansible/playbook.yml"
-    ansible.skip_tags = "once"
+    # ansible.skip_tags = "once"
   end    
 end

@@ -44,10 +44,17 @@
   tags: once
 
 - name: 3.Install PHP packages with Pecl
-  become: true
+  become:  true
   command: pecl install mcrypt-1.0.1
   ignore_errors: yes
   tags: once
+
+- name: 4.Install Couchbase packages with Pecl
+  become:  true
+  command: pecl install couchbase
+  ignore_errors: yes
+  tags: once
+
 
 # - name: 3.Enable mcrypt
 #   become: true
@@ -57,7 +64,7 @@
 #   notify:
 #    - restart-apache2
 
-- name: 4.Write mcrypt.ini
+- name: 5.Write mcrypt.ini
   copy:
     dest: '{{item}}'
     content: 'extension=/usr/lib/php/20170718/mcrypt.so'
@@ -75,7 +82,7 @@
 #   notify:
 #    - restart-apache2
 
-- name: 5.Write into index.php file
+- name: 6.Write into index.php file
   copy:
     dest: /var/www/html/index.php
     content: '<?php phpinfo(); ?>'
@@ -84,7 +91,7 @@
 #/etc/php/7.2/apache2/conf.d/mcrypt.ini
 #/etc/php/7.2/cli/conf.d/mcrypt.ini
 
-- name: 6.Enable Couchbase
+- name: 7.Enable Couchbase
   copy:
     src: couchbase.ini
     dest: '{{item}}'

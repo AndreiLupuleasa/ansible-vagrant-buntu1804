@@ -1,0 +1,3 @@
+deb [ arch=amd64 ] http://packages.couchbase.com/releases/couchbase-server/enterprise/deb/  bionic bionic/main
+deb [ arch=amd64 ] http://packages.couchbase.com/releases/couchbase-server/community/deb/  bionic bionic/main
+deb  http://packages.couchbase.com/ubuntu bionic bionic/main

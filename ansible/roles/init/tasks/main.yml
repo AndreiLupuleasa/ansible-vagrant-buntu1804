@@ -32,11 +32,23 @@
   apt: name=python-pexpect update_cache=yes state=latest
   tags: daily
 
-- name: 4.Copy Vimrc
-  copy: 
-    src: .vimrc
+# - name: 4.Copy Vimrc
+#   copy: 
+#     src: .vimrc
+#     dest: /home/vagrant/.vimrc
+#   tags: once
+
+
+- name: 4.Install vim settings
+  git:
+    repo: git@github.com:alupuleasa/vimrc.git
+    version: master
     dest: /home/vagrant/.vimrc
+    accept_hostkey: yes
+  become: no
   tags: once
+  ignore_errors: yes
+
 
 - name: 5.Install vim color schemes
   git:
@@ -46,6 +58,7 @@
     accept_hostkey: yes
   become: no
   tags: once
+  ignore_errors: yes
 
 # How to add .bashrc variable
 # export test="xxx"
