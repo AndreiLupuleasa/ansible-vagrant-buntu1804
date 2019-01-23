@@ -31,6 +31,7 @@
 - name: 3.Install python extensions
   apt: name=python-pexpect update_cache=yes state=latest
   tags: daily
+  ignore_errors: yes
 
 # - name: 4.Copy Vimrc
 #   copy: 

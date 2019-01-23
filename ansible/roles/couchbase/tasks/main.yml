@@ -16,10 +16,20 @@
   tags: once
 
 - name: 4.Add Couchbase Key
-  get_url:     
-    url: http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add - 
-    dest: /home/vagrant/couchbase.key
-  tags: once
+  apt_key:
+    url: http://packages.couchbase.com/ubuntu/couchbase.key
+    state: present
+# - name: 4.0.Transfer the script
+#   copy: src=add_key.sh dest=/home/vagrant/add_key.sh mode=0777
+
+# - name: 4.1.Add Couchbase Key
+#   become: true
+#   command: sh add_key.sh
+
+# - name: 4.Add Couchbase Key
+#   apt_key:
+#     url: http://packages.couchbase.com/ubuntu/couchbase.key
+#     keyring: 
 
 # - name: 4.Add Couchbase Key
 #   become: true
@@ -54,10 +64,10 @@
 
 - name: 6. Install Couchbase Libs 
   apt: 
-    name:
-     -libcouchbase-dev 
-     -libcouchbase2-bin 
-     -build-essential
+    pkg:
+     - libcouchbase-dev 
+     - libcouchbase2-bin 
+     - build-essential
     state: latest
 
 - name: 7.Update firewall
