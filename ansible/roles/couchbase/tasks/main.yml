@@ -19,6 +19,7 @@
   apt_key:
     url: http://packages.couchbase.com/ubuntu/couchbase.key
     state: present
+  tags: once
 
 - name: 5.Update and upgrade apt packages
   become: true
@@ -34,6 +35,8 @@
      - libcouchbase2-bin 
      - build-essential
     state: latest
+  ignore_errors: yes
+  tags: once
 
 - name: 7.Update firewall
   become: true
