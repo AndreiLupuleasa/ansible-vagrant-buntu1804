@@ -29,42 +29,25 @@
   tags: daily
     
 - name: 3.Install python extensions
-  apt: name=python-pexpect update_cache=yes state=latest
+  apt: name=python-pexpect update_cache=yes state=latest cache_valid_time=86400 #One day
   tags: daily
   ignore_errors: yes
 
-# - name: 4.Copy Vimrc
-#   copy: 
-#     src: .vimrc
-#     dest: /home/vagrant/.vimrc
-#   tags: once
-
-
 - name: 4.Install vim settings
   git:
-    repo: git@github.com:alupuleasa/vimrc.git
+    repo: https://github.com/alupuleasa/vimrc.git
     version: master
     dest: /home/vagrant/.vimrc
-    accept_hostkey: yes
   become: no
   tags: once
-  ignore_errors: yes
-
 
 - name: 5.Install vim color schemes
   git:
-    repo: git@github.com:flazz/vim-colorschemes.git
+    repo: https://github.com/flazz/vim-colorschemes.git
     version: master
     dest: /home/vagrant/.vim
-    accept_hostkey: yes
   become: no
   tags: once
-  ignore_errors: yes
-
-# How to add .bashrc variable
-# export test="xxx"
-# sed -i 's/HISTSIZE=1000/HISTSIZE=/g' ~/.bashrc
-# sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
 
 - name: 6.Modify Bashrc HISTSIZE.
   lineinfile:
@@ -80,6 +63,12 @@
     line: 'HISTFILESIZE='
   tags: once
 
+#git@github.com:alupuleasa/vimrc.git
+#https://github.com/alupuleasa/vimrc.git
+
+#https://github.com/flazz/vim-colorschemes.git
+#git@github.com:alupuleasa/vimrc.git
+
 # - name: 4.Clone Vimrc
 #   git:
 #     repo: git@github.com:alupuleasa/vimrc.git
@@ -90,3 +79,20 @@
 #   become: no
 #   notify:
 #     - move-vimrc
+
+# - name: 1.Change key permission
+#   become: true
+#   file: 
+#     path: /home/vagrant/.ssh/id_rsa
+#     mode: 0400
+
+# How to add .bashrc variable
+# export test="xxx"
+# sed -i 's/HISTSIZE=1000/HISTSIZE=/g' ~/.bashrc
+# sed -i 's/HISTFILESIZE=2000/HISTFILESIZE=/g' ~/.bashrc
+
+# - name: 4.Copy Vimrc
+#   copy: 
+#     src: .vimrc
+#     dest: /home/vagrant/.vimrc
+#   tags: once

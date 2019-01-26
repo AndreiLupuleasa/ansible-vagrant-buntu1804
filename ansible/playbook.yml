@@ -6,6 +6,6 @@
     - init
     - apache
     - couchbase
-    - php72   
+    - php72
     - go
     - node
