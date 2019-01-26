@@ -2,7 +2,7 @@
 - name: 1.Install Gdebi latest
   apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
   tags: once
-  
+
 - name: 2.Download Couchbase server
   get_url:
     url: https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
@@ -10,7 +10,7 @@
   tags: once
 
 - name: 3.Copy couchbase list
-  copy: 
+  copy:
     src: couchbase.list
     dest: /etc/apt/sources.list.d/couchbase.list
   tags: once
@@ -28,8 +28,8 @@
     state: present
   tags: once
 
-- name: 6. Install Couchbase Libs 
-  apt: 
+- name: 6. Install Couchbase Libs
+  apt:
     pkg:
      - libcouchbase-dev
      - libcouchbase2-bin

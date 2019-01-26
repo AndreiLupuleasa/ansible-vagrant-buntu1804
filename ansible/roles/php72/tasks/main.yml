@@ -5,22 +5,22 @@
     name:
      - php7.2
      - php7.2-dev
-     - php7.2-cli 
-     - php7.2-common 
-     - php7.2-fpm 
-     - php7.2-gd 
-     - php7.2-intl 
-     - php7.2-json 
-     - php7.2-mbstring 
-     - php7.2-opcache 
-     - php7.2-pdo 
-     - php7.2-soap 
-     - php7.2-xml 
+     - php7.2-cli
+     - php7.2-common
+     - php7.2-fpm
+     - php7.2-gd
+     - php7.2-intl
+     - php7.2-json
+     - php7.2-mbstring
+     - php7.2-opcache
+     - php7.2-pdo
+     - php7.2-soap
+     - php7.2-xml
      - php7.2-xmlrpc
-     - php7.2-xdebug 
-     - php7.2-memcached 
-     - php7.2-dom 
-     - php7.2-curl 
+     - php7.2-xdebug
+     - php7.2-memcached
+     - php7.2-dom
+     - php7.2-curl
      - php7.2-bcmath
      - php7.2-apcu
      - php-amqp
@@ -28,7 +28,7 @@
      - php-pear
      - mcrypt
      - libmcrypt4
-     - libmcrypt-dev 
+     - libmcrypt-dev
      - libtomcrypt-dev
      - libtomcrypt1
     state: latest
@@ -88,7 +88,7 @@
   tags: once
 
 - name: 9. Restart Apache2
-  service: name=apache2 state=restarted  
+  service: name=apache2 state=restarted
 
 # - name: 9. Restart Apache2
 # service: name=apache2 state=restarted
