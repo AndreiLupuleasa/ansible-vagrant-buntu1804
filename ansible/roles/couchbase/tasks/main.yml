@@ -31,8 +31,8 @@
 - name: 6. Install Couchbase Libs 
   apt: 
     pkg:
-     - libcouchbase-dev 
-     - libcouchbase2-bin 
+     - libcouchbase-dev
+     - libcouchbase2-bin
      - build-essential
     state: latest
   ignore_errors: yes
