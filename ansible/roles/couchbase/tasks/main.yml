@@ -33,6 +33,8 @@
   apt:
     upgrade: yes
     state: latest
+    update_cache: yes
+    cache_valid_time: 86400 #One day
   tags: once
 
 - name: 7. Install Couchbase Libs
