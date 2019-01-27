@@ -31,8 +31,18 @@ Vagrant.configure(2) do |config|
   config.vm.box_check_update = false
 
   # Copy personal private key with access to repository to machine
-  config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"  
-  config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
+  # config.vm.provision "file", source: "~/.ssh/id_rsa", destination: "~/.ssh/id_rsa"  
+  # config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
+
+  # Copy local user's SSH key to /home/vagrant/.ssh/id_rsa
+  if File.exists?(File.join("ssh", "id_rsa"))
+    config.vm.provision :shell, :inline => "echo 'Copying local Git SSH Key to VM...'"
+    config.vm.provision :shell, :inline => "mkdir -p /home/vagrant/.ssh && cp /vagrant/ssh/* /home/vagrant/.ssh/ && chmod 600 /home/vagrant/.ssh/*"
+    config.vm.provision :shell, :inline => "sudo chown `id -u vagrant`:`id -g vagrant` /home/vagrant/.ssh/*"
+  else
+    # Else, throw a Vagrant Error. Cannot successfully startup without a GitHub SSH Key!
+    raise Vagrant::Errors::VagrantError, "\n\nERROR: GitHub SSH Key not found at ~/.ssh/id_rsa\n\n"
+  end
   
   # set up ssh
   # config.ssh.username   = "vagrant"
@@ -50,11 +60,23 @@ Vagrant.configure(2) do |config|
 	  vb.customize ["modifyvm", :id, "--vrde", "off"]                  # disable remote desktop
   end
   
-  # Run Ansible files
+  # Run Ansible files 1 time
+  config.vm.provision :shell, :inline => "echo 'Playing ansible 1st time...'"
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose   = "vv"
 	  ansible.become    = true # execute as root
     ansible.playbook  = "ansible/playbook.yml"
     # ansible.skip_tags = "once"
-  end    
+  end   
+
+  # Run Ansible files 2nd time because couchbase configs and libs aren't finished 1st time
+  # It's crappy, I know but it's ok for now
+  config.vm.provision :shell, :inline => "echo 'Playing ansible 2nd time...'"
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.verbose   = "vv"
+    ansible.become    = true # execute as root
+    ansible.playbook  = "ansible/playbook.yml"
+    # ansible.skip_tags = "once"
+  end  
+
 end

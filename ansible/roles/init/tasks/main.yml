@@ -43,7 +43,7 @@
 
 - name: 5.Install vim color schemes
   git:
-    repo: https://github.com/flazz/vim-colorschemes.git
+    repo: https://github.com/alupuleasa/vim-colorschemes.git
     version: master
     dest: /home/vagrant/.vim
   become: no
