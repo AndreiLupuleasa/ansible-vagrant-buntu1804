@@ -49,22 +49,12 @@ Vagrant.configure(2) do |config|
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
 	  vb.customize ["modifyvm", :id, "--vrde", "off"]                  # disable remote desktop
   end
-  
-  # Run Ansible files 1st time
+
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose   = "vv"
 	  ansible.become    = true # execute as root
     ansible.playbook  = "ansible/playbook.yml"
     # ansible.skip_tags = "once"
   end   
-
-  # Run Ansible files 2nd time because couchbase configs and libs aren't finished 1st time
-  # It's crappy, I know but it's ok for now
-  # config.vm.provision "ansible_local" do |ansible|
-  #   ansible.verbose   = "vv"
-  #   ansible.become    = true # execute as root
-  #   ansible.playbook  = "ansible/playbook.yml"
-  #   # ansible.skip_tags = "once"
-  # end  
 
 end
