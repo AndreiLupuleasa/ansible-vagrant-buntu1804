@@ -15,6 +15,7 @@
     command: gdebi /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
     responses:
       'Do you want to install the software package\? \[y/N\]': 'y'
+  tags: once
 
 - name: 4.Copy couchbase list
   copy:
@@ -35,7 +36,7 @@
     state: latest
     update_cache: yes
     cache_valid_time: 86400 #One day
-  tags: once
+  # tags: once
 
 - name: 7. Install Couchbase Libs
   apt:
