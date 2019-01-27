@@ -31,12 +31,11 @@
 
 - name: 6.Update and upgrade apt packages
   become: true
-  apt:
-    upgrade: yes
-    state: latest
-    update_cache: yes
-    cache_valid_time: 86400 #One day
-  # tags: once
+  command: apt-get update
+  args:
+    warn: false # don't warn us about apt having its own plugin
+  ignore_errors: yes
+  tags: once
 
 - name: 7. Install Couchbase Libs
   apt:
@@ -86,11 +85,20 @@
 
 
 # - name: 5.Stop Couchbase Server
-  # become: true
-  # command: systemctl stop couchbase-server 
-  # tags: once
+#   become: true
+#   command: systemctl stop couchbase-server 
+#   tags: once
 
 # - name: 6.Disable Couchbase Server
 #   become: true
 #   command: systemctl disable couchbase-server 
+#   tags: once
+
+# - name: 6.Update and upgrade apt packages
+#   become: true
+#   apt:
+#     upgrade: dist
+#     state: latest
+#     update_cache: yes
+#     cache_valid_time: 86400 #One day
 #   tags: once

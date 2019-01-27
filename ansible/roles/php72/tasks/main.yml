@@ -91,10 +91,10 @@
   service: name=apache2 state=restarted
 
 # - name: 9. Restart Apache2
-# service: name=apache2 state=restarted
+#   service: name=apache2 state=restarted
 
-#/etc/php/7.2/apache2/conf.d/mcrypt.ini
-#/etc/php/7.2/cli/conf.d/mcrypt.ini
+#  /etc/php/7.2/apache2/conf.d/mcrypt.ini
+#  /etc/php/7.2/cli/conf.d/mcrypt.ini
 
 # - name: 3.Enable mcrypt
 #   become: true
