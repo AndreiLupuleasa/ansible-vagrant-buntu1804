@@ -40,7 +40,7 @@
 
 - name: 7. Install Couchbase Libs
   apt:
-    pkg:
+    name:
      - libcouchbase-dev
      - libcouchbase2-bin
      - build-essential
