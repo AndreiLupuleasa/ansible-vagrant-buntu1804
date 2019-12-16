@@ -5,7 +5,9 @@
    roles:
     - init
     - apache
+    - bluetooth
     - couchbase
+    - mysql
     - php72
     - go
     - node

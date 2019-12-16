@@ -1,0 +1,13 @@
+---
+- name: 1.Install Bluetooth
+  become: true
+  apt:
+    name:
+      -bluetooth
+      -bluez
+      -bluez-utils
+      -bluez-tools
+      -blueman
+      -rfkill
+      -xxd
+      -bc

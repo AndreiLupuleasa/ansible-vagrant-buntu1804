@@ -22,10 +22,12 @@ Vagrant.configure(2) do |config|
   # Sync the sources folder with the machine
   # For Windows `nfs` is preferred due to poor performance of default settings.
   if Vagrant::Util::Platform.windows?
-    config.vm.synced_folder "share", "/var/www/html", type: 'nfs'
+    # config.vm.synced_folder "share", "/var/www/html", type: 'nfs' #doesn't work for now 
+    config.vm.synced_folder "share", "/var/www/html", mount_options: ["dmode=777","fmode=777"]
   else
     config.vm.synced_folder "share", "/var/www/html", mount_options: ["dmode=777","fmode=777"]
   end
+
 
   # Set to true if you want automatic checks
   config.vm.box_check_update = false
@@ -48,6 +50,15 @@ Vagrant.configure(2) do |config|
 	  vb.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
 	  vb.customize ["modifyvm", :id, "--vrde", "off"]                  # disable remote desktop
+
+    vb.customize ["modifyvm", :id, "--usb", "on"]
+    vb.customize ["modifyvm", :id, "--usbehci", "on"]
+    vb.customize ["usbfilter", "add", "0", 
+      "--target", :id, 
+      "--name", "Realtek 802.11n WLAN Adapter [0200]",
+      "--manufacturer", "Realtek",
+      "--product", "802.11n WLAN Adapter"]
+
   end
 
   config.vm.provision "ansible_local" do |ansible|

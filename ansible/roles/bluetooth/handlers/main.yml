@@ -1,0 +1,9 @@
+---
+- name: start-bluetooth
+  service: name=bluetooth state=restarted
+
+
+# hciconfig hci0 up
+# rfkill unblock all
+# sudo systemctl restart bluetooth.service
+  
