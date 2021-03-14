@@ -1,3 +1,4 @@
 /share
 /.vagrant
 /ansible/.idea
+/nbproject/private/

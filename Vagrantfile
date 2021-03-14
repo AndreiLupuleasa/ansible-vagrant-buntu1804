@@ -11,7 +11,7 @@ end
 Vagrant.configure(2) do |config|
 
   # config.vm.box = "ubuntu/trusty64" # VM OS version
-  config.vm.box      = "geerlingguy/ubuntu1804" # VM OS version
+  config.vm.box      = "geerlingguy/ubuntu2004" # VM OS version
   config.vm.hostname = "vagrantdev"
   # set IP and ports
   # config.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true # http
@@ -63,9 +63,10 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "ansible_local" do |ansible|
     ansible.verbose   = "vv"
-	  ansible.become    = true # execute as root
+    ansible.become    = true # execute as root
     ansible.playbook  = "ansible/playbook.yml"
     # ansible.skip_tags = "once"
+    ansible.extra_vars = { ANSIBLE_FORCE_COLOR: true, ANSIBLE_NO_COLOR: false}
   end   
 
 end

@@ -1,4 +1,20 @@
 ---
-- name: 1.Install Go latest
-  apt: name=golang update_cache=yes state=latest cache_valid_time=86400
+- name: 1.Download Go 1.16.2
+  become: true
+  get_url: 
+    url: https://golang.org/dl/go1.16.2.linux-amd64.tar.gz
+    dest: /usr/local
+    mode: 0755
+  tags: once
+    
+- name: 2.Install Go
+  become: true
+  shell: rm -rf /usr/local/go && tar -C /usr/local -xzf /usr/local/go1.16.2.linux-amd64.tar.gz
+  tags: once
+  
+- name: 3.Set Go Path
+  become: true
+  copy:
+    dest: /etc/profile.d/custom-path.sh
+    content: 'PATH=$PATH:/usr/local/go/bin'
   tags: once

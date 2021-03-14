@@ -1,0 +1,6 @@
+---
+- name: 1.Install Docker latest
+  apt: 
+    name: 
+      - docker.io
+      - docker-compose

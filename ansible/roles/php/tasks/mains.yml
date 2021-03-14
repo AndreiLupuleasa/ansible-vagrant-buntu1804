@@ -1,0 +1,111 @@
+---
+- name: 1.Install PHP packages
+  become: true
+  apt:
+    name:
+     - php
+     - php-dev
+     - php-cli
+     - php-common
+     - php-fpm
+     - php-gd
+     - php-intl
+     - php-json
+     - php-mbstring
+     - php-opcache
+     - php-pdo
+     - php-soap
+     - php-xml
+     - php-xmlrpc
+     - php-xdebug
+     - php-memcached
+     - php-dom
+     - php-curl
+     - php-bcmath
+     - php-apcu
+     - php-amqp
+     - php-pecl-http
+     - php-pear
+     - mcrypt
+     - libmcrypt4
+     - libmcrypt-dev
+     - libtomcrypt-dev
+     - libtomcrypt1
+    state: latest
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+  notify:
+   - restart-apache2
+  tags: once
+
+- name: 2.Update  Pecl
+  become: true
+  command: pecl channel-update pecl.php.net
+  tags: once
+
+# - name: 3.Install PHP packages with Pecl
+#   become:  true
+#   command: pecl install mcrypt-1.0.1
+#   notify:
+#    - restart-apache2
+#   tags: once
+#   ignore_errors: yes
+
+# - name: 4.Write mcrypt.ini
+#   copy:
+#     dest: '{{item}}'
+#     content: 'extension=/usr/lib/php/20170718/mcrypt.so'
+#   with_items:
+#    - '/etc/php/7.2/cli/conf.d/mcrypt.ini'
+#    - '/etc/php/7.2/apache2/conf.d/mcrypt.ini'
+#   notify:
+#    - restart-apache2
+#   tags: once
+
+# - name: 5.Write into index.php file
+#   copy:
+#     dest: /var/www/html/index.php
+#     content: '<?php phpinfo(); ?>'
+#   tags: once
+
+# - name: 6.Install Couchbase packages with Pecl
+#   become:  true
+#   command: pecl install couchbase
+#   notify:
+#    - restart-apache2
+#   tags: once
+#   ignore_errors: yes
+
+# - name: 8.Enable Couchbase
+#   copy:
+#     src: couchbase.ini
+#     dest: '{{item}}'
+#   with_items:
+#    - '/etc/php/7.2/apache2/conf.d/couchbase.ini'
+#    - '/etc/php/7.2/cli/conf.d/couchbase.ini'
+#   notify:
+#    - restart-apache2
+#   tags: once
+
+# - name: 9. Restart Apache2
+#   service: name=apache2 state=restarted
+
+# - name: 9. Restart Apache2
+#   service: name=apache2 state=restarted
+
+#  /etc/php/7.2/apache2/conf.d/mcrypt.ini
+#  /etc/php/7.2/cli/conf.d/mcrypt.ini
+
+# - name: 3.Enable mcrypt
+#   become: true
+#   command: phpenmod mcrypt 
+#   notify:
+#    - restart-apache2
+
+# - name: 3.Enable mcrypt
+#   become: true
+#   shell:
+#    - bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/cli/conf.d/mcrypt.ini"
+#    - bash -c "echo extension=/usr/lib/php/20170718/mcrypt.so > /etc/php/7.2/apache2/conf.d/mcrypt.ini"
+#   notify:
+#    - restart-apache2

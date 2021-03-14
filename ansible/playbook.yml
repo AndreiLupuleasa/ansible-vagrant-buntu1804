@@ -1,13 +1,9 @@
 ---
 # created by Andrei Lupuleasa, December 2018.
- - name: Ubuntu 18.04
-   hosts: all
+ - name: Ubuntu 20.04
+   hosts: all  
    roles:
     - init
-    - apache
-    - bluetooth
-    - couchbase
-    - mysql
-    - php72
+    - php
     - go
-    - node
+    - docker
