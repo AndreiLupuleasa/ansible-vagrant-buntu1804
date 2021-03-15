@@ -1,11 +1,22 @@
 ---
-- name: 1.Install Couchbase
-  become: true
-  apt: 
-    deb: https://packages.couchbase.com/clients/c/repos/deb/ubuntu2004 focal focal/main
+
+- name: 1.Install Gdebi latest
+  apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
   tags: once
 
-- name: 2.Update and upgrade apt packages
+- name: 2.Copy couchbase list
+  copy:
+    src: couchbase.list
+    dest: /etc/apt/sources.list.d/couchbase.list
+  tags: once
+
+- name: 3.Add Couchbase Key
+  apt_key:
+    url: http://packages.couchbase.com/ubuntu/couchbase.key
+    state: present
+  tags: once
+
+- name: 4.Update and upgrade apt packages
   become: true
   command: apt-get update
   args:
@@ -13,7 +24,7 @@
   ignore_errors: yes
   tags: once
 
-- name: 3.Search libcouchbase
+- name: 5.Search libcouchbase
   become: true
   command: sudo apt search libcouchbase
   args:
@@ -21,7 +32,7 @@
   ignore_errors: yes
   tags: once
 
-- name: 4. Install Couchbase Libs
+- name: 6. Install Couchbase Libs
   apt:
     name:
      - libcouchbase3
