@@ -4,6 +4,8 @@
    hosts: all  
    roles:
     - init
+    - couchbase
+    - apache2
     - php
     - go
     - docker

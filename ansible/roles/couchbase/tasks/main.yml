@@ -1,35 +1,10 @@
----
-- name: 1.Install Gdebi latest
-  apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
-  tags: once
-
-- name: 2.Download Couchbase server
-  get_url:
-    url: https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
-    dest: /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
-  tags: once
-
-- name: 3.Install Couchbase server
+- name: 1.Install Couchbase
   become: true
-  expect:
-    command: gdebi /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
-    responses:
-      'Do you want to install the software package\? \[y/N\]': 'y'
+  apt: 
+    deb: https://packages.couchbase.com/clients/c/repos/deb/ubuntu2004 focal focal/main
   tags: once
 
-- name: 4.Copy couchbase list
-  copy:
-    src: couchbase.list
-    dest: /etc/apt/sources.list.d/couchbase.list
-  tags: once
-
-- name: 5.Add Couchbase Key
-  apt_key:
-    url: http://packages.couchbase.com/ubuntu/couchbase.key
-    state: present
-  tags: once
-
-- name: 6.Update and upgrade apt packages
+- name: 2.Update and upgrade apt packages
   become: true
   command: apt-get update
   args:
@@ -37,21 +12,84 @@
   ignore_errors: yes
   tags: once
 
-- name: 7. Install Couchbase Libs
+- name: 3.Search libcouchbase
+  become: true
+  command: sudo apt search libcouchbase
+  args:
+    warn: false # don't warn us about apt having its own plugin
+  ignore_errors: yes
+  tags: once
+
+- name: 4. Install Couchbase Libs
   apt:
     name:
+     - libcouchbase3
      - libcouchbase-dev
-     - libcouchbase2-bin
-     - build-essential
+     - libcouchbase3-tools
+     - libcouchbase-dbg
+     - libcouchbase3-libev
+     - libcouchbase3-libevent
     state: latest
   ignore_errors: yes
   tags: once
 
-- name: 8.Update firewall
-  become: true
-  command: ufw allow from any to any port 369,8091:8094,9100:9105,9998,9999,11209:11211,11214,11215,18091:18093,21100:21299 proto tcp
-  tags: once
 
+#####################################################################################
+---
+# - name: 1.Install Gdebi latest
+#   apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
+#   tags: once
+
+# - name: 2.Download Couchbase server
+#   get_url:
+#     url: https://packages.couchbase.com/releases/5.0.1/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+#     dest: /home/vagrant/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+#   tags: once
+
+# - name: 3.Install Couchbase server
+#   become: true
+#   expect:
+#     command: gdebi ~/couchbase-server-community_5.0.1-ubuntu16.04_amd64.deb
+#     responses:
+#       'Do you want to install the software package\? \[y/N\]': 'y'
+#   tags: once
+
+# - name: 4.Copy couchbase list
+#   copy:
+#     src: couchbase.list
+#     dest: /etc/apt/sources.list.d/couchbase.list
+#   tags: once
+
+# - name: 5.Add Couchbase Key
+#   apt_key:
+#     url: http://packages.couchbase.com/ubuntu/couchbase.key
+#     state: present
+#   tags: once
+
+# - name: 6.Update and upgrade apt packages
+#   become: true
+#   command: apt-get update
+#   args:
+#     warn: false # don't warn us about apt having its own plugin
+#   ignore_errors: yes
+#   tags: once
+
+# - name: 7. Install Couchbase Libs
+#   apt:
+#     name:
+#      - libcouchbase-dev
+#      - libcouchbase2-bin
+#      - build-essential
+#     state: latest
+#   ignore_errors: yes
+#   tags: once
+
+# - name: 8.Update firewall
+#   become: true
+#   command: ufw allow from any to any port 369,8091:8094,9100:9105,9998,9999,11209:11211,11214,11215,18091:18093,21100:21299 proto tcp
+#   tags: once
+
+##########################################################################
 
 # - name: 4.0.Transfer the script
 #   copy: src=add_key.sh dest=/home/vagrant/add_key.sh mode=0777
