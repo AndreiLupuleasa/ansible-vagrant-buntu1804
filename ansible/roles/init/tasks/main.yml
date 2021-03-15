@@ -51,14 +51,30 @@
 
 - name: 6.Modify Bashrc HISTSIZE.
   lineinfile:
-    path: /home/vagrant/.bashrc
-    regexp: 'HISTSIZE=1000'
-    line: 'HISTSIZE='
+    path: ~/.bashrc
+    line: {{item}}
+  with_items:
+    - 'export XDEBUG_CONFIG="idekey=PHPSTORM"'
+    - 'export PHP_IDE_CONFIG="serverName=localhost"'
+    - 'export PATH=$PATH:/usr/lib/go/bin'
+    - 'export GOROOT=/usr/lib/go'
+    - 'export GOBIN=/usr/bin/go'
+    - 'export GOPATH=/var/www/html/go'
+    - 'export PATH=$GOPATH/bin:$GOROOT/bin:$PATH'
+    - 'export PATH=$GOBIN:$PATH'
+    - 'export GO111MODULE=on'
   tags: once
 
 - name: 7.Modify Bashrc HISTSIZE.
   lineinfile:
-    path: /home/vagrant/.bashrc
+    path: ~/.bashrc
+    regexp: 'HISTFILESIZE=2000'
+    line: 'HISTFILESIZE='
+  tags: once
+
+- name: 8.Append Bashrc PATHS.
+  lineinfile:
+    path: ~/.bashrc
     regexp: 'HISTFILESIZE=2000'
     line: 'HISTFILESIZE='
   tags: once
