@@ -1,10 +1,5 @@
 ---
-
-- name: 1.Install Gdebi latest
-  apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
-  tags: once
-
-- name: 2.Copy couchbase list
+- name: 1.Copy couchbase list
   copy:
     src: couchbase.list
     dest: /etc/apt/sources.list.d/couchbase.list
