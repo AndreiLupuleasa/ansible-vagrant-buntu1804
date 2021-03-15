@@ -1,3 +1,4 @@
+---
 - name: 1.Install Couchbase
   become: true
   apt: 
@@ -35,7 +36,7 @@
 
 
 #####################################################################################
----
+
 # - name: 1.Install Gdebi latest
 #   apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
 #   tags: once
