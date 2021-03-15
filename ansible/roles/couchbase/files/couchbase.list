@@ -1,3 +1,1 @@
-deb [ arch=amd64 ] http://packages.couchbase.com/releases/couchbase-server/enterprise/deb/  bionic bionic/main
-deb [ arch=amd64 ] http://packages.couchbase.com/releases/couchbase-server/community/deb/  bionic bionic/main
-deb  http://packages.couchbase.com/ubuntu bionic bionic/main
+deb https://packages.couchbase.com/clients/c/repos/deb/ubuntu2004 focal focal/main
