@@ -52,7 +52,7 @@
 - name: 6.Modify Bashrc HISTSIZE.
   lineinfile:
     path: ~/.bashrc
-    line: {{item}}
+    line: '{{item}}'
   with_items:
     - 'export XDEBUG_CONFIG="idekey=PHPSTORM"'
     - 'export PHP_IDE_CONFIG="serverName=localhost"'
