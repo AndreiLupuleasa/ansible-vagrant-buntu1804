@@ -5,7 +5,7 @@
    roles:
     - init
     - couchbase
-    - apache2
+    - apache
     - php
     - go
     - docker
