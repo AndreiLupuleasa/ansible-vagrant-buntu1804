@@ -4,7 +4,6 @@
   apt:
     name:
      - php
-     - php-pear
      - php-dev
      - php-cli
      - php-common
