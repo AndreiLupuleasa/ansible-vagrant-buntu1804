@@ -1,7 +1,9 @@
 ---
 
-- name: 1.Install Gdebi latest
-  apt: name=gdebi-core update_cache=yes state=latest cache_valid_time=86400
+- name: 1.Add Couchbase Key
+  apt_key:
+    url: https://packages.couchbase.com/clients/c/repos/deb/couchbase.key
+    state: present
   tags: once
 
 - name: 2.Copy couchbase list
@@ -10,15 +12,9 @@
     dest: /etc/apt/sources.list.d/couchbase.list
   tags: once
 
-- name: 3.Add Couchbase Key
-  apt_key:
-    url: http://packages.couchbase.com/ubuntu/couchbase.key
-    state: present
-  tags: once
-
 - name: 4.Update and upgrade apt packages
   become: true
-  command: apt-get update
+  command: apt update
   args:
     warn: false # don't warn us about apt having its own plugin
   ignore_errors: yes
@@ -26,7 +22,7 @@
 
 - name: 5.Search libcouchbase
   become: true
-  command: sudo apt search libcouchbase
+  command: apt search libcouchbase
   args:
     warn: false # don't warn us about apt having its own plugin
   ignore_errors: yes

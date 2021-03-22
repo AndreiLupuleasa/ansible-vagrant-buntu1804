@@ -4,7 +4,7 @@
   tags: once
 
 - name: 2.Install PHP module for Apache
-  apt: name=libapache2-mod-php7.2 update_cache=yes state=latest cache_valid_time=86400
+  apt: name=libapache2-mod-php7.4 update_cache=yes state=latest cache_valid_time=86400
   tags: once
   
 - name: 3.Enabled mod_rewrite

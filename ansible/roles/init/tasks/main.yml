@@ -79,6 +79,15 @@
     line: 'HISTFILESIZE='
   tags: once
 
+- name: 9.Change key permission
+  become: true
+  file: 
+    path: /home/vagrant/.ssh/id_rsa
+    mode: 0400
+
+
+#############################################################################################    
+
 #git@github.com:alupuleasa/vimrc.git
 #https://github.com/alupuleasa/vimrc.git
 

@@ -45,7 +45,7 @@
 
 - name: 3.Install PHP packages with Pecl
   become:  true
-  command: pecl install mcrypt-1.0.1
+  command: pecl install mcrypt
   notify:
    - restart-apache2
   tags: once
@@ -54,10 +54,10 @@
 - name: 4.Write mcrypt.ini
   copy:
     dest: '{{item}}'
-    content: 'extension=/usr/lib/php/20170718/mcrypt.so'
+    content: 'extension=/usr/lib/php/20190902/mcrypt.so'
   with_items:
-   - '/etc/php/7.2/cli/conf.d/mcrypt.ini'
-   - '/etc/php/7.2/apache2/conf.d/mcrypt.ini'
+   - '/etc/php/7.4/cli/conf.d/mcrypt.ini'
+   - '/etc/php/7.4/apache2/conf.d/mcrypt.ini'
   notify:
    - restart-apache2
   tags: once
