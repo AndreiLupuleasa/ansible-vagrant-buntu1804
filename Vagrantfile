@@ -22,8 +22,30 @@ Vagrant.configure(2) do |config|
   # Sync the sources folder with the machine
   # For Windows `nfs` is preferred due to poor performance of default settings.
   if Vagrant::Util::Platform.windows?
-    # config.vm.synced_folder "share", "/var/www/html", type: 'nfs' #doesn't work for now 
-    config.vm.synced_folder "share", "/var/www/html", mount_options: ["dmode=777","fmode=777"]
+
+    # default config
+    config.vm.synced_folder "share", "/var/www/html", 
+    mount_options: ["dmode=777","fmode=777"]
+    # default config
+
+    # nfs config -  doesn't work for now
+    # config.vm.synced_folder "share", "/var/www/html", 
+    # type: 'nfs', 
+    # nfs_version: 4,
+    # nfs_udp: false,
+    # mount_options: ['actimeo=2'], 
+    # linux__nfs_options: ['rw','no_subtree_check','all_squash','async'] 
+    # nfs config - doesn't work for now
+    
+    # smb config
+    # config.vm.synced_folder "share", "/var/www/html", 
+    # type: 'smb',  
+    # smb_password: "vagrant", 
+    # smb_username: "vagrant@workgroup",
+    # mount_options: ["dmode=777","fmode=777"]
+    # mount_options: ["vers=3.02","mfsymlinks","dmode=777","fmode=777", "sec=ntlm"] # "sec=ntlmssp"
+    # smb config
+
   else
     config.vm.synced_folder "share", "/var/www/html", mount_options: ["dmode=777","fmode=777"]
   end
@@ -46,18 +68,18 @@ Vagrant.configure(2) do |config|
 	  vb.name   = "vagrantdev" # VM name
     vb.memory = 1096 # RAM
     vb.cpus   = 1 # CPU count
-	  vb.customize ["modifyvm", :id, "--vram", "64"]                   # video ram memory
-	  vb.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
-    vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
-	  vb.customize ["modifyvm", :id, "--vrde", "off"]                  # disable remote desktop
+    # vb.customize ["modifyvm", :id, "--vram", "64"]                   # video ram memory
+    # vb.customize ["modifyvm", :id, "--clipboard",   "bidirectional"] # copy/paste functionality
+    # vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"] # draganddrop functionality
+    # vb.customize ["modifyvm", :id, "--vrde", "off"]                  # disable remote desktop
 
-    vb.customize ["modifyvm", :id, "--usb", "on"]
-    vb.customize ["modifyvm", :id, "--usbehci", "on"]
-    vb.customize ["usbfilter", "add", "0", 
-      "--target", :id, 
-      "--name", "Realtek 802.11n WLAN Adapter [0200]",
-      "--manufacturer", "Realtek",
-      "--product", "802.11n WLAN Adapter"]
+    # vb.customize ["modifyvm", :id, "--usb", "on"]
+    # vb.customize ["modifyvm", :id, "--usbehci", "on"]
+    # vb.customize ["usbfilter", "add", "0", 
+    #   "--target", :id, 
+    #   "--name", "Realtek 802.11n WLAN Adapter [0200]",
+    #   "--manufacturer", "Realtek",
+    #   "--product", "802.11n WLAN Adapter"]
 
   end
 
